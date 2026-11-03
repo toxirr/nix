@@ -67,6 +67,8 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."toxir" = {
     isNormalUser = true;
+    uid = 1000;
+    shell = pkgs.zsh;
     description = "toxir";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
@@ -94,6 +96,7 @@
     zed-editor
     element
     zmk-studio
+    zsh
   ];
 
 

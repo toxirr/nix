@@ -1,0 +1,80 @@
+{ pkgs, ... }:
+{
+  programs.zsh = {
+    enable = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+
+    enableCompletion = true;
+    plugins = [
+      # {
+      #   name = "vi-mode";
+      #   src = pkgs.zsh-vi-mode;
+      #   file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      # }
+      {
+        name = "zsh-fzf-history-search";
+        file = "zsh-fzf-history-search.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "joshskidmore";
+          repo = "zsh-fzf-history-search";
+          rev = "master";
+          sha256 = "sha256-6UWmfFQ9JVyg653bPQCB5M4jJAJO+V85rU7zP4cs1VI=";
+        };
+      }
+    ];
+
+    shellAliases = {
+      nv = "nvim";
+      cl = "clear";
+      lg = "lazygit";
+      reload = "sudo nixos-rebuild switch --flake ~/nix#$(whoami) && $SHELL";
+      nixload = "sudo nixos-rebuild switch --flake ~/nix#tokhir";
+      ee = "eza --tree";
+      q = "cd ..";
+      zreload = "source ~/.zshrc";
+      change = "nv ~/.zshrc && zreload";
+      mc = "java -jar ~/Downloads/TLauncher.jar";
+      # zed = "zeditor";
+      nf = "neofetch";
+      of = "onefetch";
+      c = "cargo run";
+      dev = "npm run dev";
+      build = "npm run build";
+
+      p = "python3";
+
+      l = "eza --icons";
+      ls = "eza --icons";
+      ll = "eza -lg --icons";
+      la = "eza -lag --icons";
+      lt = "eza -lTg --icons";
+      lt1 = "eza -lTg --level=1 --icons";
+      lt2 = "eza -lTg --level=2 --icons";
+      lt3 = "eza -lTg --level=3 --icons";
+      lta = "eza -lTag --icons";
+      lta1 = "eza -lTag --level=1 --icons";
+      lta2 = "eza -lTag --level=2 --icons";
+      lta3 = "eza -lTag --level=3 --icons";
+
+      # NixOS related
+      past = "nix profile history --profile /nix/var/nix/profiles/system";
+      garbage = "sudo nix-collect-garbage --delete-old";
+    };
+
+    history = {
+      extended = true;
+    };
+
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" ];
+      theme = "robbyrussell";
+    };
+
+    shellAliases = {
+      ydl = "yt-dlp -o '%(title)s.%(ext)s' -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'";
+      adl = "yt-dlp -o '%(title)s.%(ext)s' -f 'bestaudio[ext=m4a]/best' --extract-audio";
+    };
+  };
+}
