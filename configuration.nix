@@ -20,6 +20,8 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  home-manager.backupFileExtension = "v2";
+
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -77,8 +79,11 @@
     ];
   };
 
+  programs.zsh.enable = true;
+
   # Install firefox.
-  programs.firefox.enable = true;
+  # programs.firefox.enable = true;
+  # programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -94,9 +99,11 @@
     alacritty
     ayugram-desktop
     zed-editor
-    element
+    element-desktop
     zmk-studio
     zsh
+    eza
+    direnv
   ];
 
 
@@ -112,7 +119,7 @@ hardware.bluetooth.enable = true;
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+   services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
