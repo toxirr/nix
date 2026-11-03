@@ -15,7 +15,7 @@
 	outputs = { self, nixpkgs, home-manager, ... }@inputs: {
 		nixosConfigurations.toxir = nixpkgs.lib.nixosSystem {
 			modules = [
-				./configuration.nix
+				./host/configuration.nix
 
 				home-manager.nixosModules.home-manager
 				{
@@ -24,7 +24,7 @@
   					useUserPackages = true;
   					extraSpecialArgs = { inherit inputs; };
   					users = {
-  					  toxir = import ./home.nix;
+  					  toxir = import ./home-manager/home.nix;
   					};
 					};
 				}
