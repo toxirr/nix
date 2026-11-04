@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   use_system_prompts = false;
   use_system_path_prompts = false;
   disable_ai = true;
@@ -83,11 +82,11 @@
     dock = "right";
   };
   file_scan_exclusions = [
-      ".git"
-      "node_modules"
-      ".DS_Store"
-      "package-lock.json"
-    ];
+    ".git"
+    "node_modules"
+    ".DS_Store"
+    "package-lock.json"
+  ];
   use_autoclose = true;
   languages = {
     TypeScript = {

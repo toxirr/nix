@@ -1,10 +1,9 @@
-{ ... }:
-[
+{...}: [
   {
     context = "VimControl && !menu";
     bindings = {
-      cmd-j = "editor::MoveLineDown";
-      cmd-k = "editor::MoveLineUp";
+      ctrl-k = "editor::MoveLineUp";
+      ctrl-j = "editor::MoveLineDown";
       shift-k = "editor::Hover";
       "space o" = "tab_switcher::Toggle";
       "space e" = "workspace::ToggleRightDock";
@@ -48,7 +47,7 @@
       "alt-w L" = "workspace::SwapPaneRight";
       alt-i = "workspace::ToggleLeftDock";
       alt-t = "workspace::NewTerminal";
-      cmd-t = "workspace::NewCenterTerminal";
+      ctrl-t = "workspace::NewCenterTerminal";
     };
   }
   {
@@ -65,7 +64,7 @@
   {
     context = "((FileFinder || FileFinder > Picker > Editor) || FileFinder > Picker > menu)";
     bindings = {
-      cmd-shift-p = "command_palette::Toggle";
+      ctrl-shift-p = "command_palette::Toggle";
     };
   }
 ]

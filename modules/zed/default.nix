@@ -1,12 +1,11 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.zed-editor = {
     enable = true;
 
     package = pkgs.zed-editor;
-    userKeymaps = import ./keymaps.nix { };
+    userKeymaps = import ./keymaps.nix {};
 
-    userSettings = import ./settings.nix { };
+    userSettings = import ./settings.nix {};
 
     extraPackages = with pkgs; [
       biome
@@ -15,7 +14,6 @@
     ];
 
     extensions = [
-      "wakatime"
       "zig"
       "material-icon-theme"
       "toml"
@@ -24,7 +22,7 @@
       "make"
       "env"
       "git-firefly"
-      "zed-cargotom"
+      "direnv"
     ];
   };
 }

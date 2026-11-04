@@ -1,26 +1,44 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{  config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  #
+
+  virtualisation = {
+    docker = {
+      enable = true;
+      # storageDriver = "btrfs";
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+        daemon.settings = {
+          data-root = "~/.local/docker";
+          # dns = [ "1.1.1.1" "8.8.8.8" ];
+          registry-mirrors = ["https://mirror.gcr.io"];
+        };
+      };
+    };
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  home-manager.backupFileExtension = "v2";
+  home-manager.backupFileExtension = "v4";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -72,10 +90,10 @@
     uid = 1000;
     shell = pkgs.zsh;
     description = "toxir";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [
       kdePackages.kate
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -88,7 +106,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes"];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -104,10 +122,10 @@
     zsh
     eza
     direnv
+    docker
   ];
 
-
-hardware.bluetooth.enable = true;
+  hardware.bluetooth.enable = true;
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -119,7 +137,7 @@ hardware.bluetooth.enable = true;
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-   services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -150,5 +168,4 @@ hardware.bluetooth.enable = true;
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "26.05"; # Did you read the comment?
-
 }
