@@ -14,12 +14,12 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/NIXROOT";
+    { device = "/dev/disk/by-uuid/3f6093be-9d6c-418a-80c0-aac080de770d";
       fsType = "btrfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/NIXBOOT";
+    { device = "/dev/disk/by-uuid/C35F-30A2";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
