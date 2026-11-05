@@ -36,22 +36,41 @@
         ];
       };
 
-      nixosConfigurations.toxir = nixpkgs.lib.nixosSystem {
-        modules = [
-          ./host/configuration.nix
+      nixosConfigurations = {
+        toxir = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./hosts/toxir/configuration.nix
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; };
-              users = {
-                toxir = import ./home-manager/home.nix;
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs; };
+                users = {
+                  toxir = import ./home-manager/home.nix;
+                };
               };
-            };
-          }
-        ];
+            }
+          ];
+        };
+
+        waffle = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./hosts/waffle/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs; };
+                users = {
+                  toxir = import ./home-manager/home.nix;
+                };
+              };
+            }
+          ];
+        };
       };
     };
 }

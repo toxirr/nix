@@ -27,7 +27,7 @@
       nv = "nvim";
       cl = "clear";
       lg = "lazygit";
-      reload = "sudo nixos-rebuild switch --flake ~/nix#$(whoami) && $SHELL";
+      reload = "sudo nixos-rebuild switch --flake ~/nix#$(whoami)";
       nixload = "sudo nixos-rebuild switch --flake ~/nix#tokhir";
       ee = "eza --tree";
       q = "cd ..";
