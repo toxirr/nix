@@ -9,6 +9,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../packages/system.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -110,20 +111,6 @@
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    git
-    wget
-    alacritty
-    ayugram-desktop
-    zed-editor
-    element-desktop
-    zmk-studio
-    zsh
-    eza
-    direnv
-    docker
-  ];
 
   hardware.bluetooth.enable = true;
   # Some programs need SUID wrappers, can be configured further or are
