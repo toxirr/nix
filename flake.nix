@@ -38,6 +38,10 @@
 
       nixosConfigurations = {
         toxir = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+
           modules = [
             ./hosts/toxir/configuration.nix
 
@@ -56,6 +60,9 @@
         };
 
         waffle = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
             ./hosts/waffle/configuration.nix
             home-manager.nixosModules.home-manager

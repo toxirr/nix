@@ -2,9 +2,13 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
+  imports = [
+    ../../packages/system.nix
+    ./hardware-configuration.nix
+  ];
   users.users."toxir" = {
     isNormalUser = true;
     uid = 1000;
@@ -25,7 +29,7 @@
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = import ../../packages/system.nix { inherit pkgs; };
+  # environment.systemPackages =  { inherit pkgs inputs; };
 
   home-manager.backupFileExtension = "v4";
 
@@ -59,15 +63,6 @@
 
     networking.hostName = "waffle"; # Define your hostname.
 
-
-
-
-
-
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
 
 
     # fonts.packages = with pkgs; [
