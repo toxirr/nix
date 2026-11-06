@@ -17,6 +17,7 @@ in
     eza
     direnv
     docker
+    devenv
   ]
   ++(with nixpkgs-unstable;
     [

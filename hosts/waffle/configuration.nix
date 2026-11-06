@@ -8,6 +8,7 @@
   imports = [
     ../../packages/system.nix
     ./hardware-configuration.nix
+    ../../substitutors
   ];
   users.users."toxir" = {
     isNormalUser = true;
